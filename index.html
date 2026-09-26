@@ -15,6 +15,16 @@
         <div class="pattern-overlay"></div>
 
         <!-- Navigation -->
+        <!-- Mobile Nav Drawer -->
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="#" onclick="closeMobileNav()">Work</a>
+            <a href="#" onclick="closeMobileNav()">Competencies</a>
+            <a href="#" onclick="closeMobileNav()">Story</a>
+            <a href="#" onclick="closeMobileNav()">Education</a>
+            <a href="#" onclick="closeMobileNav()">Connect</a>
+            <a href="https://www.linkedin.com/in/niteenrathodofficial" target="_blank" class="highlight" onclick="closeMobileNav()">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+
         <nav class="navbar">
             <div class="logo">
                 <span class="logo-icon"><i class="fa-solid fa-cube"></i></span>
@@ -28,7 +38,12 @@
                 <li><a href="#">Connect</a></li>
                 <li><a href="https://www.linkedin.com/in/niteenrathodofficial" target="_blank" class="highlight">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
             </ul>
-            <button class="dark-mode-toggle"><i class="fa-solid fa-moon"></i></button>
+            <div class="navbar-right">
+                <button class="dark-mode-toggle"><i class="fa-solid fa-moon"></i></button>
+                <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </nav>
 
         <!-- Hero Section -->
@@ -368,5 +383,19 @@
     
     <script src="frames.js"></script>
     <script src="script.js"></script>
+    <script>
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            const btn = document.getElementById('hamburger');
+            nav.classList.toggle('open');
+            btn.classList.toggle('open');
+            document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+        }
+        function closeMobileNav() {
+            document.getElementById('mobile-nav').classList.remove('open');
+            document.getElementById('hamburger').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    </script>
 </body>
 </html>
