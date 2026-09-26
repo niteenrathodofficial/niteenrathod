@@ -682,3 +682,134 @@ footer { width: 100%; max-width: 1000px; margin: 0 auto; text-align: center; pad
     .campaign-card { padding: 1.2rem; }
     .avatar-img { height: 200px; }
 }
+
+
+/* =========================================
+   ACTIVE NAV LINK (scroll-spy)
+   ========================================= */
+.nav-links a.nav-active {
+    color: var(--text-main);
+    font-weight: 600;
+    position: relative;
+}
+.nav-links a.nav-active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--c-pink);
+    border-radius: 2px;
+}
+
+
+/* =========================================
+   DARK MODE
+   ========================================= */
+body.dark-mode {
+    --bg-color: #0F0F0F;
+    --text-main: #F0F0F0;
+    --text-light: #999999;
+    --border-color: #2A2A2A;
+}
+
+body.dark-mode #main-content {
+    background: rgba(15, 15, 15, 0.92);
+}
+
+body.dark-mode .navbar {
+    background: rgba(15, 15, 15, 0.95);
+    border-bottom-color: #2A2A2A;
+}
+
+body.dark-mode .mobile-nav {
+    background: rgba(15, 15, 15, 0.98);
+}
+body.dark-mode .mobile-nav a { color: #F0F0F0; }
+
+body.dark-mode .status-badge {
+    background: rgba(30,30,30,0.8);
+    border-color: #2A2A2A;
+}
+
+body.dark-mode .avatar-card {
+    background: rgba(25, 25, 25, 0.95);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+body.dark-mode .campaign-card,
+body.dark-mode .note-card,
+body.dark-mode .social-card,
+body.dark-mode .debate-section,
+body.dark-mode .track-container {
+    background: rgba(25, 25, 25, 0.9);
+    border-color: #2A2A2A;
+}
+
+body.dark-mode .social-card:hover {
+    border-color: #555;
+}
+
+body.dark-mode .soc-icon {
+    background: #222;
+}
+
+body.dark-mode .marquee-container {
+    background: rgba(20, 20, 20, 0.5);
+    border-color: #2A2A2A;
+}
+
+body.dark-mode .info-block {
+    border-top-color: #F0F0F0;
+}
+
+body.dark-mode .btn-dark {
+    background: #F0F0F0;
+    color: #0F0F0F;
+}
+body.dark-mode .btn-dark:hover { background: #fff; }
+
+body.dark-mode .btn-text { color: #F0F0F0; }
+
+body.dark-mode .badge-dark {
+    background: #F0F0F0;
+    color: #0F0F0F;
+}
+
+body.dark-mode .dark-mode-toggle {
+    color: var(--c-yellow);
+}
+
+body.dark-mode .hamburger span {
+    background: #F0F0F0;
+}
+
+body.dark-mode .egg-check {
+    border-color: #2A2A2A;
+}
+
+body.dark-mode .achievement-list li {
+    border-bottom-color: #2A2A2A;
+}
+
+body.dark-mode .footer-marquee {
+    border-color: #2A2A2A;
+}
+
+body.dark-mode .tag {
+    border-color: #2A2A2A;
+    color: #888;
+}
+
+body.dark-mode .pattern-overlay {
+    background-image: radial-gradient(#333 1px, transparent 1px);
+    opacity: 0.3;
+}
+
+/* Smooth dark mode transition */
+body, #main-content, .navbar, .campaign-card, .note-card,
+.social-card, .debate-section, .avatar-card, .track-container,
+.marquee-container, .status-badge, .mobile-nav, .btn-dark,
+.badge-dark, .soc-icon, .info-block, .egg-check, .tag {
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

@@ -17,11 +17,11 @@
         <!-- Navigation -->
         <!-- Mobile Nav Drawer -->
         <div class="mobile-nav" id="mobile-nav">
-            <a href="#" onclick="closeMobileNav()">Work</a>
-            <a href="#" onclick="closeMobileNav()">Competencies</a>
-            <a href="#" onclick="closeMobileNav()">Story</a>
-            <a href="#" onclick="closeMobileNav()">Education</a>
-            <a href="#" onclick="closeMobileNav()">Connect</a>
+            <a href="#section-work" onclick="closeMobileNav()">Work</a>
+            <a href="#section-competencies" onclick="closeMobileNav()">Competencies</a>
+            <a href="#section-story" onclick="closeMobileNav()">Story</a>
+            <a href="#section-education" onclick="closeMobileNav()">Education</a>
+            <a href="#section-connect" onclick="closeMobileNav()">Connect</a>
             <a href="https://www.linkedin.com/in/niteenrathodofficial" target="_blank" class="highlight" onclick="closeMobileNav()">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
 
@@ -31,15 +31,15 @@
                 <span class="logo-text">Niteen</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#">Work</a></li>
-                <li><a href="#">Competencies</a></li>
-                <li><a href="#">Story</a></li>
-                <li><a href="#">Education</a></li>
-                <li><a href="#">Connect</a></li>
+                <li><a href="#section-work">Work</a></li>
+                <li><a href="#section-competencies">Competencies</a></li>
+                <li><a href="#section-story">Story</a></li>
+                <li><a href="#section-education">Education</a></li>
+                <li><a href="#section-connect">Connect</a></li>
                 <li><a href="https://www.linkedin.com/in/niteenrathodofficial" target="_blank" class="highlight">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
             </ul>
             <div class="navbar-right">
-                <button class="dark-mode-toggle"><i class="fa-solid fa-moon"></i></button>
+                <button class="dark-mode-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle dark/light mode"><i class="fa-solid fa-moon"></i></button>
                 <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
                     <span></span><span></span><span></span>
                 </button>
@@ -116,7 +116,7 @@
         </div>
 
         <!-- Level 01: The stat sheet -->
-        <section class="level-section">
+        <section class="level-section" id="section-work">
             <div class="section-badge"><span class="badge-dark">LEVEL 01</span> The stat sheet</div>
             <div class="stat-sheet-grid">
                 <div class="info-block">
@@ -157,7 +157,7 @@
         </section>
 
         <!-- Level 02: Campaigns -->
-        <section class="level-section">
+        <section class="level-section" id="section-campaigns">
             <div class="section-badge"><span class="badge-dark">LEVEL 02</span> Campaigns</div>
             <div class="campaign-cards">
                 <div class="campaign-card">
@@ -215,7 +215,7 @@
         </section>
 
         <!-- Level 03: The story -->
-        <section class="level-section">
+        <section class="level-section" id="section-story">
             <div class="section-badge"><span class="badge-dark">LEVEL 03</span> The story</div>
             <div class="story-content">
                 <p>I started out my career off-campus and on-campus recruitment as an HR Coordinator at <strong>Directi</strong>. It taught me how to manage end-to-end recruitment pipelines, conduct candidate assessments, and handle large-scale logistics.</p>
@@ -226,7 +226,7 @@
         </section>
 
         <!-- Level 04: Core Competencies -->
-        <section class="level-section">
+        <section class="level-section" id="section-competencies">
             <div class="section-badge"><span class="badge-dark">LEVEL 04</span> Core Competencies</div>
             <p class="notes-intro">My expertise lies in aligning tech with business strategies. Here is what I bring to the table:</p>
             <div class="notes-grid">
@@ -254,7 +254,7 @@
         </section>
 
         <!-- Level 05: Achievements & Education -->
-        <section class="level-section">
+        <section class="level-section" id="section-education">
             <div class="section-badge"><span class="badge-dark">LEVEL 05</span> Education & Certifications</div>
             <ul class="achievement-list">
                 <li>
@@ -288,7 +288,7 @@
         </section>
 
         <!-- Say Hi: Let's talk -->
-        <section class="level-section">
+        <section class="level-section" id="section-connect">
             <div class="section-badge"><span class="badge-dark">SAY HI</span> Let's talk</div>
             <p class="talk-intro">Building the future of Digital CX? Need someone to lead your digital transformation? The fastest way to reach me is via LinkedIn or Email.</p>
             <div class="social-cards">
@@ -384,6 +384,7 @@
     <script src="frames.js"></script>
     <script src="script.js"></script>
     <script>
+        /* ── Mobile Nav ─────────────────────────────── */
         function toggleMobileNav() {
             const nav = document.getElementById('mobile-nav');
             const btn = document.getElementById('hamburger');
@@ -396,6 +397,54 @@
             document.getElementById('hamburger').classList.remove('open');
             document.body.style.overflow = '';
         }
+
+        /* ── Smooth Scroll for nav links ────────────── */
+        document.querySelectorAll('a[href^="#section-"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 16;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /* ── Active nav link highlight on scroll ─────── */
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#section-"]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(sec => {
+                if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('nav-active', link.getAttribute('href') === '#' + current);
+            });
+        }, { passive: true });
+
+        /* ── Dark / Light Mode Toggle ───────────────── */
+        const DARK_KEY = 'niteen-dark-mode';
+        const toggleBtn = document.getElementById('dark-mode-toggle');
+
+        function applyTheme(isDark) {
+            document.body.classList.toggle('dark-mode', isDark);
+            toggleBtn.innerHTML = isDark
+                ? '<i class="fa-solid fa-sun"></i>'
+                : '<i class="fa-solid fa-moon"></i>';
+            localStorage.setItem(DARK_KEY, isDark ? '1' : '0');
+        }
+
+        function toggleDarkMode() {
+            applyTheme(!document.body.classList.contains('dark-mode'));
+        }
+
+        // Restore saved preference on load
+        (function() {
+            const saved = localStorage.getItem(DARK_KEY);
+            if (saved === '1') applyTheme(true);
+        })();
     </script>
 </body>
 </html>
